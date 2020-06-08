@@ -1,0 +1,43 @@
+using System;
+
+namespace Matala4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("enter size: ");
+            //   int n=Convert.ToInt32(Console.ReadLine());  ---> may crash if the given string can't be converted into int
+            bool flg = int.TryParse(Console.ReadLine(), out int n);// 
+            if (flg)
+            {
+                string[][] arr = new string[n][];
+
+                for (int i = 0; i < n; i++)
+                    arr[i] = new string[n];
+
+                for (int i = 0; i < arr[0].Length; i++)
+                {
+                    for (int j = 0; j < arr[0].Length; j++)
+                    {
+                        if (i == j)
+                            arr[i][j] = "main";
+                        if (i > j)
+                            arr[i][j] = "down";
+                        if (i < j)
+                            arr[i][j] = "up";
+                        if (i + j == arr[0].Length - 1)
+                            arr[i][j] = (arr[i][j] == "main") ? "center" : "second";
+
+                        Console.Write($"[{arr[i][j],5}]");
+                    }
+                    Console.WriteLine("\n");
+                }
+            }
+            else
+                Console.WriteLine("Wrong input!!!");
+
+            Console.ReadKey();
+        }
+    }
+}
